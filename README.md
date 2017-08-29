@@ -1,4 +1,4 @@
-pythonCodes
+Problem Solving
 ===========
 
-Single source files that contain implementation of different problems.
+Randon programming problem solution.
