@@ -1,13 +1,36 @@
-*.py[cod]
+# DIRS
+build/
+node_modules/
+passmark/
+passmark/*
+passmark/**/*
+public/js/*
+public/css/*
+lht/
+dbdata/
+coverage/
+build/
+logs/
 
-# C extensions
-*.so
 
-# Packages
+# Logs/files/etc
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+stdout.log
+log.txt
+pids
+npm-debug.log
+.env
+.db.env
+build.json
 *.egg
 *.egg-info
 dist
-build
 eggs
 parts
 bin
@@ -18,19 +41,29 @@ develop-eggs
 lib
 lib64
 __pycache__
+*.py[cod]
 
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
-.coverage
-.tox
 nosetests.xml
 
-# Translations
-*.mo
-
-# Mr Developer
+# web-storm/vs-code/osx
+.idea
+dump.rdb
+.DS_Store
+.vscode
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+.gitlab-ci-ref.yml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# content caching
+tmp/
+package-lock.json
+kube.deploy.yaml
+google-cloud-sdk/
+yarn.lock

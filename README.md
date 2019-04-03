@@ -1,4 +1,4 @@
 Problem Solving
 ===========
 
-Randon programming problem solution.
+This repository contains solutions of the problems I solve in my spare time.
