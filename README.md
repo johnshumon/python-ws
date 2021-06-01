@@ -1,4 +1,4 @@
-Problem Solving
+Python Workspace
 ===========
 
-This repository contains solutions of the problems I solve in my spare time.
+This is my python workspace repository. It contains codes mostly learnt from different tutorials.
