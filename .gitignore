@@ -29,10 +29,13 @@ ENV/
 env.bak/
 venv.bak/
 
-# user difened
+# user difened dir
 aws-trainings/
 bkash-apis/
 drf_tutorial/
+
+# user defined files
 csv-json-rw/*.json
 csv-json-rw/*.csv
 csv-json-rw/insert_into_db.py
+_learn.md
