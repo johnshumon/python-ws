@@ -2,6 +2,10 @@
 
 
 def factorial(number: int) -> int:
+    if number > 100:
+        print("Too large number")
+        return
+
     if (number == 0 or number == 1):
         return 1
     else:
