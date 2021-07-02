@@ -33,6 +33,7 @@ venv.bak/
 aws-trainings/
 bkash-apis/
 drf_tutorial/
+sanic-boilerplate/
 
 # user defined files
 csv-json-rw/*.json
