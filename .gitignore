@@ -40,5 +40,3 @@ csv-json-rw/*.json
 csv-json-rw/*.csv
 csv-json-rw/insert_into_db.py
 _learn.md
-
-randoms/string_rotation.py
