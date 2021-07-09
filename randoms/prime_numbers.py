@@ -13,7 +13,7 @@ def is_prime_number(number: int) -> bool:
 
 
 def main():
-    for i in range(20):
+    for i in range(100):
         if (is_prime_number(i)):
             print("{0}: prime".format(i))
         else:
