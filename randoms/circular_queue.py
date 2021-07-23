@@ -1,5 +1,22 @@
 """Circular Queue Module"""
 
+# Algorithm for Circular Queue
+# > Initialize the queue, with size of the queue
+#   defined (max_size), and head and tail pointers.
+#
+# > enqueue: Check if the number of elements is equal to maxSize - 1:
+#   - If Yes, then return Queue is full
+#   - If No, then add the new data element to the location of tail
+#     pointer and increment the tail pointer.
+#
+# > dequeue: Check if the number of elements in the queue is zero:
+#   - If Yes, then return Queue is empty
+#   - If No, then increment the head pointer.
+#
+# > size:
+#   - If tail >= head --> size = tail - head
+#   - If head > tail --> size = max_size - (head - tail)
+
 from typing import Any
 
 
