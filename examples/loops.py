@@ -24,7 +24,7 @@ def loops(arr: list) -> None:
     print("break example...")
     for element in arr:
         print(element)
-        if (element < 0):
+        if element < 0:
             print("negative number")
             break
 

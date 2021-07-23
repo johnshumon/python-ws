@@ -6,7 +6,7 @@ def factorial(number: int) -> int:
         print("Too large number")
         return
 
-    if (number == 0 or number == 1):
+    if number == 0 or number == 1:
         return 1
     else:
         return number * factorial(number - 1)

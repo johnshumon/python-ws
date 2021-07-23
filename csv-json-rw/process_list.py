@@ -21,7 +21,7 @@ def read_write_json(read_file_path, cus_file_path, pro_file_path):
             customer = {
                 "name": content["customer"],
                 "customer_id": str(customer_id),
-                "url": ""
+                "url": "",
             }
 
             project = {
@@ -47,7 +47,7 @@ def read_write_json(read_file_path, cus_file_path, pro_file_path):
                 "cloud_platform": content["cloud_platform"],
                 "technology": content["technology"],
                 "description": content["description"],
-                "customer_id": str(customer_id)
+                "customer_id": str(customer_id),
             }
 
             customer_list.append(customer)

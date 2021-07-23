@@ -7,7 +7,7 @@ from typing import Any
 
 
 def str_to_tuple(passed_str: str) -> None:
-    result = tuple(map(int, passed_str.split(', ')))
+    result = tuple(map(int, passed_str.split(", ")))
     print("Tuple after conversion: {}".format(result))
 
 

@@ -1,6 +1,6 @@
 """ Example function to generate  hashed url"""
-import json
 import hashlib
+import json
 
 
 def generate_url(payload):

@@ -11,8 +11,8 @@ def double_dash() -> None:
     # > /: float value
     #   //: floar/interger value
 
-    flaot_val = 8/3
-    int_val = 8//3
+    flaot_val = 8 / 3
+    int_val = 8 // 3
     print("8/3: {0:.3f} -- ".format(flaot_val), "8//3: {}".format(int_val))
     # print("8/3: {} - 8//3: {}".format(flaot_val, int_val))
 

@@ -13,10 +13,10 @@ def min_max(arr: list) -> list:
     min_max_list = []
 
     for element in arr:
-        if (element < min_value):
+        if element < min_value:
             min_value = element
 
-        if (element > max_value):
+        if element > max_value:
             max_value = element
     min_max_list.append(min_value)
     min_max_list.append(max_value)
