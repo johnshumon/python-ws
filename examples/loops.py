@@ -2,17 +2,20 @@
 
 
 def loops(arr: list) -> None:
-    # i is an integer, can access the list element with arr[i]
+    # i is an integer, can access the list element
+    # with arr[i]
     print("for i in range...")
     for i in range(len(arr)):
         print(arr[i])
 
-    # element refers to the element in the list, i.e. it is the same as arr[i]
+    # element refers to the element in the list,
+    # i.e. it is the same as arr[i]
     print("for element in arr...")
     for element in arr:
         print(element)
 
-    # if you want to skip the the first element, you can slice the list [tutorial]:
+    # if you want to skip the the first element,
+    # you can slice the list [tutorial]:
     print("for element in arr[1:]")
     for element in arr[1:]:
         print(element)

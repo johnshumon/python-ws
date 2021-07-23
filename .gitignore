@@ -1,3 +1,8 @@
+# IDE/OSX related dirs
+.vscode
+.idea
+.DS_Store
+
 # byte-compiled/optimized
 __pycache__/
 *.py[cod]
