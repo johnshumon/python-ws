@@ -1,4 +1,4 @@
-"""BST in-order successor module"""
+"""Binary Search Tree module"""
 
 
 # Definition for a binary tree node.
@@ -207,7 +207,7 @@ def main():
 # to display the BST as a graph.
 # ref: https://stackoverflow.com/a/54074933/1453339
 def display(node):
-    """Display BST as a graph we draw
+    """Display BST as a graph like we draw
     using pen and paper.
     """
     lines, *_ = display_aux(node)
