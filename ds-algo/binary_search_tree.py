@@ -255,7 +255,7 @@ def main():
     # get height of the tree
     print("height: {}".format(solution.tree_height(bst)))
 
-    # get height of the tree
+    # get distance from root to node
     print(
         "distance between 20 and 4 is: {}".format(
             solution.distance_from_root(bst, bst.left.left)
