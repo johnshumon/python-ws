@@ -104,6 +104,22 @@ class Solution:
         right_height = self.tree_height(node.right)
         return max(left_height, right_height) + 1
 
+    def distance_from_root(self, root: Node, node: Node) -> int:
+        """Returns distance between root and the
+        given node.
+        """
+
+        if root.key == node.key:
+            return 0
+
+        if node.key < root.key:
+            return self.distance_from_root(root.left, node) + 1
+
+        # else block would be unnecessary because if the above
+        # condition is false it will automatically fall to the
+        # below statement.
+        return self.distance_from_root(root.right, node) + 1
+
     def inorder_successor(self, node: Node) -> Node:
         """returns in-order successor of a given node
         if exists. None otherwise.
@@ -212,7 +228,9 @@ def main():
     print("post-order-traversal: {}".format(solution.postorder_traversal(bst)))
 
     inorder_succ = solution.inorder_successor(bst.left.right)
-    print("in-order successor of {} is: {}".format(bst.left.right.key, inorder_succ.key))
+    print(
+        "in-order successor of {} is: {}".format(bst.left.right.key, inorder_succ.key)
+    )
 
     # search key in the tree
     print("{} in the tree: {}".format(17, solution.search_node(bst, 17)))
@@ -227,6 +245,17 @@ def main():
     # get height of the tree
     print("height: {}".format(solution.tree_height(bst)))
 
+    # get height of the tree
+    print(
+        "distance between 20 and 4 is: {}".format(
+            solution.distance_from_root(bst, bst.left.left)
+        )
+    )
+
 
 if __name__ == "__main__":
     main()
+# find distance between two node
+# rewrite height function
+# koho hour log
+# plan for ds and yki
