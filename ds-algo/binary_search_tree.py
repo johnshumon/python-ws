@@ -120,6 +120,16 @@ class Solution:
         # below statement.
         return self.distance_from_root(root.right, node) + 1
 
+    def distance_between_nodes(self, node_a: Node, node_b: Node) -> int:
+
+        if node_a or node_a is None:
+            return 0
+
+        if self.search_node(node_a, node_a.key) or self.search_node(node_b, node_b.key):
+            return self.distance_from_root(self.root, node_a) + self.distance_from_root(
+                self.root, node_b
+            )
+
     def inorder_successor(self, node: Node) -> Node:
         """returns in-order successor of a given node
         if exists. None otherwise.
