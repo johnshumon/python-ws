@@ -1,5 +1,7 @@
 """Binary Search Tree module"""
 
+from utils import bst_graph  # pylint: disable=import-error
+
 
 # Definition for a binary tree node.
 class Node:
@@ -14,6 +16,9 @@ class Node:
 
 class Solution:
     """Solution class"""
+
+    def __init__(self, root=None) -> None:
+        self.root = root
 
     def insert_node(self, node: Node, key: int) -> Node:
         """inserts node in the tree"""
@@ -46,26 +51,27 @@ class Solution:
 
         return node
 
-    def search_node(self, root: Node, search_key: int) -> bool:
+    def search_node(self, node: Node, search_key: int) -> bool:
         """returns true if a given node is in the tree
         false otherwise
         """
-        if root.key == search_key:
+        # > empty tree
+        if node is None:
+            return False
+
+        # > given key is found
+        if node.key == search_key:
             return True
 
         # > search key might be in the left subtree
-        if search_key < root.key:
-            if root.left:
-                return self.search_node(root.left, search_key)
-            else:
-                return False
+        if search_key < node.key:
+            if node.left:
+                return self.search_node(node.left, search_key)
 
         # > search key might be in the right subtree
-        if search_key > root.key:
-            if root.right:
-                return self.search_node(root.right, search_key)
-            else:
-                return False
+        if search_key > node.key:
+            if node.right:
+                return self.search_node(node.right, search_key)
 
         return False
 
@@ -74,6 +80,9 @@ class Solution:
         given node if any. i.e. return the key
         with minimum value.
         """
+        if node is None:
+            return None
+
         return node if node.left is None else self.get_leftmost_node(node.left)
 
     def get_rightmost_node(self, node: Node) -> Node:
@@ -82,6 +91,18 @@ class Solution:
         with maximum value.
         """
         return node if node.right is None else self.get_rightmost_node(node.right)
+
+    def tree_height(self, node: Node) -> int:
+        """Returns height of the tree if not empty.
+        0 otherwise
+        """
+
+        if node is None:
+            return 0
+
+        left_height = self.tree_height(node.left)
+        right_height = self.tree_height(node.right)
+        return max(left_height, right_height) + 1
 
     def inorder_successor(self, node: Node) -> Node:
         """returns in-order successor of a given node
@@ -178,11 +199,12 @@ def main():
     solution = Solution()
 
     # builds the binary search tree
-    # bst = solution.build_tree([20, 8, 22, 4, 12, 10, 14, 8])
-    bst = solution.build_tree([17, 4, 1, 20, 9, 23, 18, 34])
+    bst = solution.build_tree([20, 8, 22, 4, 12, 10, 14, 8])
+    # bst = None
+    # bst = solution.build_tree([17, 4, 1, 20, 9, 23, 18, 34])
 
     # displays the tree as a graph
-    display(bst)
+    bst_graph.display(bst)
 
     # in, pre, and post order traversal
     print("in-order-traversal: {}".format(solution.inorder_traversal(bst)))
@@ -202,70 +224,9 @@ def main():
     # get node with largest key
     print("largest node: {}".format(solution.get_rightmost_node(bst).key))
 
-
-# dirty hack copied from stackoverflow
-# to display the BST as a graph.
-# ref: https://stackoverflow.com/a/54074933/1453339
-def display(node):
-    """Display BST as a graph like we draw
-    using pen and paper.
-    """
-    lines, *_ = display_aux(node)
-    for line in lines:
-        print(line)
-
-
-def display_aux(node):
-    """Returns list of strings, width, height,
-    and horizontal coordinate of the root.
-    """
-    # No child.
-    if node.right is None and node.left is None:
-        line = "%s" % node.key
-        width = len(line)
-        height = 1
-        middle = width // 2
-        return [line], width, height, middle
-
-    # Only left child.
-    if node.right is None:
-        lines, n, p, x = display_aux(node.left)
-        s = "%s" % node.key
-        u = len(s)
-        first_line = (x + 1) * " " + (n - x - 1) * "_" + s
-        second_line = x * " " + "/" + (n - x - 1 + u) * " "
-        shifted_lines = [line + u * " " for line in lines]
-        return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
-
-    # Only right child.
-    if node.left is None:
-        lines, n, p, x = display_aux(node.right)
-        s = "%s" % node.key
-        u = len(s)
-        first_line = s + x * "_" + (n - x) * " "
-        second_line = (u + x) * " " + "\\" + (n - x - 1) * " "
-        shifted_lines = [u * " " + line for line in lines]
-        return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
-
-    # Two children.
-    left, n, p, x = display_aux(node.left)
-    right, m, q, y = display_aux(node.right)
-    s = "%s" % node.key
-    u = len(s)
-    first_line = (x + 1) * " " + (n - x - 1) * "_" + s + y * "_" + (m - y) * " "
-    second_line = x * " " + "/" + (n - x - 1 + u + y) * " " + "\\" + (m - y - 1) * " "
-    if p < q:
-        left += [n * " "] * (q - p)
-    elif q < p:
-        right += [m * " "] * (p - q)
-    zipped_lines = zip(left, right)
-    lines = [first_line, second_line] + [a + u * " " + b for a, b in zipped_lines]
-    return lines, n + m + u, max(p, q) + 2, n + u // 2
+    # get height of the tree
+    print("height: {}".format(solution.tree_height(bst)))
 
 
 if __name__ == "__main__":
     main()
-
-
-# take print function to a separate module
-# add height funciton
