@@ -148,7 +148,9 @@ class Solution:
             return self._distance_between_nodes(root.right, node_a, node_b)
 
         # > LCA is found, so return the distance.
-        return self.distance_from_root(root, node_a) + self.distance_from_root(root, node_b)
+        return self.distance_from_root(root, node_a) + self.distance_from_root(
+            root, node_b
+        )
 
     def inorder_successor(self, node: Node) -> Node:
         """Returns in-order successor of a given node
