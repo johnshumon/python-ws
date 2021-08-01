@@ -17,25 +17,22 @@ class Node:
 class Solution:
     """Solution class"""
 
-    def __init__(self, root=None) -> None:
-        self.root = root
-
     def insert_node(self, node: Node, key: int) -> Node:
-        """inserts node in the tree"""
-        # > tree is empty
+        """Inserts a node in the tree"""
+        # > Tree is empty
         # ------------------
         if node is None:
             return Node(key)
 
-        # > node already exists
+        # > Node already exists
         #   avoid duplication of keys
         # ---------------------------
         if key == node.key:
             return node
 
-        # > add node recursively in the sub-tree
+        # > Add node recursively in the sub-tree
         # --------------------------------------
-        elif key < node.key:
+        if key < node.key:
             if node.left:
                 self.insert_node(node.left, key)
             else:
@@ -51,34 +48,34 @@ class Solution:
 
         return node
 
-    def search_node(self, node: Node, search_key: int) -> bool:
-        """returns true if a given node is in the tree
+    def search_node(self, root: Node, search_key: int) -> bool:
+        """Returns true if a given key exists in the tree
         false otherwise
         """
-        # > empty tree
-        if node is None:
+        # > Empty tree
+        if root is None:
             return False
 
-        # > given key is found
-        if node.key == search_key:
+        # > Given key is found
+        if root.key == search_key:
             return True
 
-        # > search key might be in the left subtree
-        if search_key < node.key:
-            if node.left:
-                return self.search_node(node.left, search_key)
+        # > Search key might be in the left subtree
+        if search_key < root.key:
+            if root.left:
+                return self.search_node(root.left, search_key)
 
-        # > search key might be in the right subtree
-        if search_key > node.key:
-            if node.right:
-                return self.search_node(node.right, search_key)
+        # > Search key might be in the right subtree
+        if search_key > root.key:
+            if root.right:
+                return self.search_node(root.right, search_key)
 
         return False
 
     def get_leftmost_node(self, node: Node) -> Node:
-        """Returns the left most node of a
-        given node if any. i.e. return the key
-        with minimum value.
+        """Returns the left most node of a given
+        node if any. i.e. Returns the key with
+        the minimum value.
         """
         if node is None:
             return None
@@ -86,10 +83,13 @@ class Solution:
         return node if node.left is None else self.get_leftmost_node(node.left)
 
     def get_rightmost_node(self, node: Node) -> Node:
-        """Returns the right most node of a
-        given node if any. i.e. return the key
-        with maximum value.
+        """Returns the right most node of a given
+        node if any. i.e. Returns the key with
+        the maximum value.
         """
+        if node is None:
+            return None
+
         return node if node.right is None else self.get_rightmost_node(node.right)
 
     def tree_height(self, node: Node) -> int:
@@ -108,38 +108,58 @@ class Solution:
         """Returns distance between root and the
         given node.
         """
-
         if root.key == node.key:
             return 0
 
         if node.key < root.key:
             return self.distance_from_root(root.left, node) + 1
 
-        # else block would be unnecessary because if the above
+        # Else block would be unnecessary because if the above
         # condition is false it will automatically fall to the
         # below statement.
         return self.distance_from_root(root.right, node) + 1
 
-    def distance_between_nodes(self, node_a: Node, node_b: Node) -> int:
+    def distance_between_nodes(self, root: Node, node_a: Node, node_b: Node) -> int:
+        """Returns distance between nodes if they exist
+        in the tree.
+        """
+        # Calculate distance between nodes if both
+        # exists in the tree.
+        if self.search_node(root, node_a.key) and self.search_node(root, node_b.key):
+            return self._distance_between_nodes(root, node_a, node_b)
 
-        if node_a or node_a is None:
-            return 0
+        return 0
 
-        if self.search_node(node_a, node_a.key) or self.search_node(node_b, node_b.key):
-            return self.distance_from_root(self.root, node_a) + self.distance_from_root(
-                self.root, node_b
-            )
+    def _distance_between_nodes(self, root: Node, node_a: Node, node_b: Node) -> int:
+        """Helper function. Calls itself recursively to find
+        LCA. Calculates and returns the distance once LCA is
+        found.
+        """
+
+        # > If both nodes are either in the left or right side
+        #   of the tree then root is updated to that side acco-
+        #   rdingly. Here root is actually the longest common
+        #   ancestor (LCA).
+        # -----------------------------------------------------
+        if node_a.key < root.key and node_b.key < root.key:
+            return self._distance_between_nodes(root.left, node_a, node_b)
+
+        if node_a.key > root.key and node_b.key > root.key:
+            return self._distance_between_nodes(root.right, node_a, node_b)
+
+        # > LCA is found, so return the distance.
+        return self.distance_from_root(root, node_a) + self.distance_from_root(root, node_b)
 
     def inorder_successor(self, node: Node) -> Node:
-        """returns in-order successor of a given node
+        """Returns in-order successor of a given node
         if exists. None otherwise.
         """
-        # > the successor is somewhere lower in the right subtree
+        # > The successor is somewhere lower in the right subtree
         #   successor: one step right and then all the way left.
         if node.right:
             return self.get_leftmost_node(node.right)
 
-        # > the successor is somewhere upper in the tree
+        # > The successor is somewhere upper in the tree
         parent = node.parent
         child = node
 
@@ -153,8 +173,8 @@ class Solution:
         return parent
 
     def inorder_traversal(self, node: Node) -> list:
-        """returns in-order traversal list of a given BST.
-        traverse order: left -> root -> right
+        """Returns in-order traversal list of a given BST.
+        > Traverse order: left -> root -> right
         """
         elements = []
 
@@ -172,8 +192,8 @@ class Solution:
         return elements
 
     def preorder_traversal(self, node: Node) -> list:
-        """returns pre-order traversal list of a given BST.
-        traverse order: root -> left -> right
+        """Returns pre-order traversal list of a given BST.
+        > Traverse order: root -> left -> right
         """
         elements = []
 
@@ -191,8 +211,8 @@ class Solution:
         return elements
 
     def postorder_traversal(self, node: Node) -> list:
-        """returns post-order traversal list of a given BST.
-        traverse order: left -> right -> root
+        """Returns post-order traversal list of a given BST.
+        > Traverse order: left -> right -> root
         """
         elements = []
 
@@ -244,7 +264,7 @@ def main():
 
     # search key in the tree
     print("{} in the tree: {}".format(17, solution.search_node(bst, 17)))
-    print("{} in the tree: {}".format(2, solution.search_node(bst, 2)))
+    print("{} in the tree: {}".format(14, solution.search_node(bst, 14)))
 
     # get node with smallest key
     print("smallest node: {}".format(solution.get_leftmost_node(bst).key))
@@ -262,10 +282,13 @@ def main():
         )
     )
 
+    # get distance between nodes
+    print(
+        "distance between 14 and 22 is: {}".format(
+            solution.distance_between_nodes(bst, bst.left.right.right, bst.right)
+        )
+    )
+
 
 if __name__ == "__main__":
     main()
-# find distance between two node
-# rewrite height function
-# koho hour log
-# plan for ds and yki
